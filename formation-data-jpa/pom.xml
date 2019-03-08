@@ -6,10 +6,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>sopra.formation</groupId>
-	<artifactId>formation-data-jpa</artifactId>
+	<artifactId>formation-data-jpa-vC</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
-	<name>formation-data-jpa</name>
+	<name>formation-data-jpa-vC</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -20,7 +20,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>sopra.formation</groupId>
-			<artifactId>formation-model</artifactId>
+			<artifactId>formation-model-vC</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
