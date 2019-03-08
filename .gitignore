@@ -1,0 +1,12 @@
+
+formation-model/\.settings/
+
+formation-model/\.classpath
+
+formation-model/\.project
+
+formation-data-jpa/\.settings/
+
+formation-data-jpa/\.classpath
+
+formation-data-jpa/\.project
