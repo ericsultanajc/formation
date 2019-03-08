@@ -1,5 +1,5 @@
 package sopra.formation.model;
 
 public enum Civilite {
-	M,MME,NA;
+	M,MME,NA,MM;
 }
