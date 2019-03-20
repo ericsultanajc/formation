@@ -10,3 +10,11 @@ formation-data-jpa/\.settings/
 formation-data-jpa/\.classpath
 
 formation-data-jpa/\.project
+
+formation-data-jpa-spring/\.settings/
+
+formation-data-jpa-spring/target/
+
+formation-data-jpa-spring/\.classpath
+
+formation-data-jpa-spring/\.project
