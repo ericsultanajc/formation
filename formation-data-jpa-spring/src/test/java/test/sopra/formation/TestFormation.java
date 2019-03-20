@@ -2,7 +2,8 @@ package test.sopra.formation;
 
 import java.util.Date;
 
-import sopra.formation.Application;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import sopra.formation.dao.IClientDao;
 import sopra.formation.dao.IEleveFormateurDao;
 import sopra.formation.dao.IFormationDao;
@@ -24,13 +25,15 @@ import sopra.formation.model.StatutJuridique;
 public class TestFormation {
 
 	public static void main(String[] args) {
-		IClientDao clientDao = Application.getInstance().getClientDao();
-		IEleveFormateurDao eleveFormateurDao = Application.getInstance().getEleveFormateurDao();
-		IFormationDao formationDao = Application.getInstance().getFormationDao();
-		IMatiereDao matiereDao = Application.getInstance().getMatiereDao();
-		IOrdinateurDao ordinateurDao = Application.getInstance().getOrdinateurDao();
-		IPersonneDao personneDao = Application.getInstance().getPersonneDao();
-		ISalleDao salleDao = Application.getInstance().getSalleDao();
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
+		
+		IClientDao clientDao = context.getBean(IClientDao.class);
+		IEleveFormateurDao eleveFormateurDao = context.getBean(IEleveFormateurDao.class);
+		IFormationDao formationDao = context.getBean(IFormationDao.class);
+		IMatiereDao matiereDao = context.getBean(IMatiereDao.class);
+		IOrdinateurDao ordinateurDao = context.getBean(IOrdinateurDao.class);
+		IPersonneDao personneDao = context.getBean(IPersonneDao.class);
+		ISalleDao salleDao = context.getBean(ISalleDao.class);
 
 		Client sopraSteria = new Client("32682006500083", "SOPRA STERIA GROUP", StatutJuridique.SA);
 
@@ -99,7 +102,7 @@ public class TestFormation {
 		
 		Eleve geraldineFind = (Eleve) personneDao.find(geraldine.getId());
 		
-		System.out.println(geraldineFind.getOrdinateur().getCode());
+//		System.out.println(geraldineFind.getOrdinateur().getCode());
 	}
 
 }
