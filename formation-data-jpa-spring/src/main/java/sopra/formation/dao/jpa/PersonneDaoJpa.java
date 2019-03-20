@@ -19,6 +19,8 @@ import sopra.formation.model.Personne;
 @Repository
 @Transactional
 public class PersonneDaoJpa implements IPersonneDao {
+	@PersistenceContext
+	private EntityManager em;
 
 	@PersistenceContext
 	private EntityManager em;

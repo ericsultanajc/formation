@@ -22,6 +22,7 @@
 		base-package="sopra.formation.dao.jpa" />
 
 	<!--On crée la DataSource avec Pooling de connection (dbcp) -->
+	<context:property-placeholder location="classpath:datasource.properties" />
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName"
@@ -43,7 +44,8 @@
 			<bean
 				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
 		</property>
-		<!--On précise les propriétés du provider (options du moteur JPA => HIBERNATE) ... -->
+		<!--On précise les propriétés du provider (options du moteur JPA => HIBERNATE) 
+			... -->
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>

@@ -40,5 +40,4 @@ public class OrdinateurDaoJpa implements IOrdinateurDao {
 	public void delete(Ordinateur obj) {
 		em.remove(em.merge(obj));
 	}
-
 }
