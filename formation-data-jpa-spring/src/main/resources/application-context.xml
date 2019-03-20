@@ -11,6 +11,9 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
+	<!-- Chargement en mémoire du fichier datasource.properties -->
+	<context:property-placeholder location="classpath:datasource.properties"/>
+
 	<!-- Activation des annotations @Component, etc ... -->
 	<context:annotation-config />
 
@@ -22,12 +25,12 @@
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName"
-			value="org.postgresql.Driver" />
+			value="${db.driver}" />
 		<property name="url"
-			value="jdbc:postgresql://localhost:5432/formation-jpa" />
-		<property name="username" value="postgres" />
-		<property name="password" value="admin" />
-		<property name="maxTotal" value="10" />
+			value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+		<property name="maxTotal" value="${db.maxTotal}" />
 	</bean>
 
 	<!--On crée un entityManagerFactory local à partir de la dataSource -->
@@ -44,7 +47,7 @@
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL94Dialect</prop>
+				<prop key="hibernate.dialect">${db.dialect}</prop>
 				<prop key="hibernate.show_sql">true</prop>
 			</props>
 		</property>
