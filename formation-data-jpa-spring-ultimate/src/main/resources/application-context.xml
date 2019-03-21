@@ -12,22 +12,20 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	<!-- Chargement en mémoire du fichier datasource.properties -->
-	<context:property-placeholder location="classpath:datasource.properties"/>
+	<context:property-placeholder
+		location="classpath:datasource.properties" />
 
-	<!-- Activation des annotations @Component, etc ... -->
-	<context:annotation-config />
-
-	<!-- Scanner le package pour créer les beans Spring -->
 	<context:component-scan
-		base-package="sopra.formation.dao.jpa" />
+		base-package="sopra.formation.repository" />
+
+	<!-- Scan des JpaRepositories -->
+	<jpa:repositories base-package="sopra.formation.repository" />
 
 	<!--On crée la DataSource avec Pooling de connection (dbcp) -->
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource">
-		<property name="driverClassName"
-			value="${db.driver}" />
-		<property name="url"
-			value="${db.url}" />
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="url" value="${db.url}" />
 		<property name="username" value="${db.username}" />
 		<property name="password" value="${db.password}" />
 		<property name="maxTotal" value="${db.maxTotal}" />

@@ -21,10 +21,7 @@ import sopra.formation.model.Personne;
 public class PersonneDaoJpa implements IPersonneDao {
 	@PersistenceContext
 	private EntityManager em;
-
-	@PersistenceContext
-	private EntityManager em;
-
+	
 	@Override
 	public List<Personne> findAll() {
 		TypedQuery<Personne> query = em.createQuery("select p from Personne p", Personne.class);
