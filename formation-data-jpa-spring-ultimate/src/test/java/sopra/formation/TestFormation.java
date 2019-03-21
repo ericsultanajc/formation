@@ -1,4 +1,4 @@
-package test.sopra.formation;
+package sopra.formation;
 
 import java.util.Date;
 import java.util.Optional;

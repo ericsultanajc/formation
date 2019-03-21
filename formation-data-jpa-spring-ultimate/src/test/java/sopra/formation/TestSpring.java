@@ -1,8 +1,9 @@
-package test.sopra.formation;
+package sopra.formation;
 
 import java.util.Date;
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import sopra.formation.model.Client;
@@ -13,6 +14,12 @@ import sopra.formation.repository.IFormationRepository;
 
 public class TestSpring {
 	public static void main(String[] args) {
+		
+		
+		Logger logger = Logger.getLogger("sopra.formation.TestSpring");
+		
+		logger.trace("J'écris dans mon log !!!");
+		
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
 
 		IClientRepository clientRepo = context.getBean(IClientRepository.class);
