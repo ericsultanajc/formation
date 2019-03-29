@@ -26,3 +26,11 @@ formation-data-jpa-spring-ultimate/target/
 formation-data-jpa-spring-ultimate/\.classpath
 
 formation-data-jpa-spring-ultimate/\.project
+
+formation-web/\.settings/
+
+formation-web/target/
+
+formation-web/\.classpath
+
+formation-web/\.project
