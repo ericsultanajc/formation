@@ -13,6 +13,7 @@
   <servlet>
   	<servlet-name>servletDeBain</servlet-name>
   	<servlet-class>sopra.exemple.HelloServlet</servlet-class>
+  	<load-on-startup>1</load-on-startup>
   </servlet>
   
   <servlet-mapping>
