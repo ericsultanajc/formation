@@ -8,7 +8,7 @@
 	<groupId>sopra.formation</groupId>
 	<artifactId>formation-web</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<packaging>war</packaging> <!-- Projet Maven Web -->
+	<packaging>war</packaging> <!-- Indique que c'est un projet Maven pour le Web -->
 
 	<name>formation-web</name>
 
