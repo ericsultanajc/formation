@@ -25,16 +25,15 @@
 	<!-- 	</nav> -->
 	<div class="container">
 		<div id="matiereEdit" class="card mt-5">
-			<form>
+			<form action="matiere" method="post">
+				<input type="hidden" name="page" value="save">
+				<input type="hidden" name="id" value="${maMatiere.id}">
+				<input type="hidden" name="version" value="${maMatiere.version}">
 				<div class="card-header">
 					<h5>Edition de la matière</h5>
 				</div>
 				<div class="card-body">
 
-					<div class="form-group">
-						<label for="id">Identifiant:</label> <input type="number"
-							class="form-control" id="id" name="id" value="${maMatiere.id}">
-					</div>
 					<div class="form-group">
 						<label for="nom">Nom:</label> <input type="text"
 							class="form-control" id="nom" name="nom" value="${maMatiere.nom}">
@@ -48,12 +47,12 @@
 				</div>
 				<div class="card-footer text-right">
 					<div class="btn-group ">
-						<button class="btn btn-success" onclick="save();">
+						<button type="submit" class="btn btn-success">
 							<i class="far fa-check-square fa-2x"></i>
 						</button>
-						<button class="btn btn-warning text-white" onclick="cancel();">
+						<a href="matiere?page=cancel" class="btn btn-warning text-white">
 							<i class="far fa-window-close fa-2x"></i>
-						</button>
+						</a>
 					</div>
 				</div>
 			</form>

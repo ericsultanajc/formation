@@ -15,21 +15,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import sopra.formation.model.Matiere;
-import sopra.formation.repository.IMatiereRepository;
+import sopra.formation.model.Civilite;
+import sopra.formation.model.Formateur;
+import sopra.formation.model.Personne;
+import sopra.formation.repository.IPersonneRepository;
 
-@WebServlet(urlPatterns = "/matiere", loadOnStartup = 1)
-public class MatiereController extends HttpServlet {
+@WebServlet(urlPatterns = "/formateur", loadOnStartup = 1)
+public class FormateurController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private ClassPathXmlApplicationContext context;
-	private IMatiereRepository matiereRepo;
+	private IPersonneRepository personneRepo;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String page = request.getParameter("page") != null ? request.getParameter("page") : "list";
-
-		// ETAPE 1 : Analyse de l'URL entrante
 
 		if (page.contentEquals("list")) {
 			list(request, response);
@@ -55,68 +55,51 @@ public class MatiereController extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		this.context = (ClassPathXmlApplicationContext) config.getServletContext().getAttribute("spring");
-		this.matiereRepo = this.context.getBean(IMatiereRepository.class);
+		this.personneRepo = this.context.getBean(IPersonneRepository.class);
 	}
 
 	private void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// ETAPE 2 : Récuperation des données
-		List<Matiere> matieres = this.matiereRepo.findAll();
+		List<Formateur> formateurs = this.personneRepo.findAllFormateur();
 
-		// ETAPE 3 : Renseigner le Model (le panier de données)
-		request.setAttribute("exemple", "ma chaine bidon pour vous montrer le passage d'attribut");
-		request.setAttribute("mesMatieres", matieres);
+		request.setAttribute("formateurs", formateurs);
 
-		// ETAPE 4 : Forward vers la View (on continue vers la présentation en JSP)
 		ServletContext sc = request.getServletContext();
-		RequestDispatcher rd = sc.getRequestDispatcher("/WEB-INF/views/matiere/list.jsp");
+		RequestDispatcher rd = sc.getRequestDispatcher("/WEB-INF/views/formateur/list.jsp");
 		rd.forward(request, response);
 	}
 
 	private void add(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/matiere/form.jsp").forward(request, response);
+		request.setAttribute("civilites", Civilite.values());
+		
+		request.getRequestDispatcher("/WEB-INF/views/formateur/form.jsp").forward(request, response);
 	}
 
 	private void edit(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Long id = Long.valueOf(request.getParameter("id"));
 
-		Optional<Matiere> opt = this.matiereRepo.findById(id);
+		Optional<Personne> opt = this.personneRepo.findById(id);
 
-		Matiere matiere = null;
+		Formateur formateur = null;
 		if (opt.isPresent()) {
-			matiere = opt.get();
+			formateur = (Formateur) opt.get();
 		}
 
-		request.setAttribute("maMatiere", matiere);
+		request.setAttribute("civilites", Civilite.values());
+		request.setAttribute("formateur", formateur);
 
-		request.getRequestDispatcher("/WEB-INF/views/matiere/form.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/formateur/form.jsp").forward(request, response);
 	}
 
 	private void save(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Long id = !request.getParameter("id").isEmpty() ? Long.valueOf(request.getParameter("id")) : null;
-		int version = !request.getParameter("version").isEmpty() ? Integer.valueOf(request.getParameter("version")) : 0;
-		String nom = request.getParameter("nom");
-		int duree = Integer.valueOf(request.getParameter("duree"));
 
-		Matiere matiere = new Matiere(id, nom, duree);
-		matiere.setVersion(version);
-
-		matiereRepo.save(matiere);
-		
-//		list(request, response); les deux fonctionnent
-		
-		request.getRequestDispatcher("/matiere?page=list").forward(request, response);
 	}
 
 	private void remove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Long id = Long.valueOf(request.getParameter("id"));
-		
-		matiereRepo.deleteById(id);
-		
-		response.sendRedirect("matiere?page=list");
+
 	}
 
 	private void cancel(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		list(request, response);
+
 	}
 
 }
