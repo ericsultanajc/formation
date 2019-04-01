@@ -10,15 +10,4 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  <servlet>
-  	<servlet-name>servletDeBain</servlet-name>
-  	<servlet-class>sopra.exemple.HelloServlet</servlet-class>
-  	<load-on-startup>1</load-on-startup>
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>servletDeBain</servlet-name>
-  	<url-pattern>/hello</url-pattern>
-  </servlet-mapping>
-  
 </web-app>
