@@ -34,3 +34,11 @@ formation-web/target/
 formation-web/\.classpath
 
 formation-web/\.project
+
+formation-web-spring/\.settings/
+
+formation-web-spring/target/
+
+formation-web-spring/\.classpath
+
+formation-web-spring/\.project
