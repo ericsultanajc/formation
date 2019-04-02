@@ -12,6 +12,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "subject")
@@ -24,6 +25,7 @@ public class Matiere {
 	@Version
 	private int version;
 	@Column(name = "name", length = 100)
+	@NotEmpty(message="Le nom est obligatoire")
 	private String nom;
 	@Column(name = "duration")
 	private int duree;

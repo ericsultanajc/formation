@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout.html">
+<head>
+<meta charset="UTF-8">
+<title>Matière</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div id="matiereEdit" class="card">
+			<form th:action="@{/matiere/save}" method="post">
+				<input type="hidden" name="id" th:value="${maMatiere.id}">
+				<input type="hidden" name="version" th:value="${maMatiere.version}">
+				<div class="card-header">
+					<h5>Edition de la matière</h5>
+				</div>
+				<div class="card-body">
+
+					<div class="form-group">
+						<label for="nom">Nom:</label> <input type="text"
+							class="form-control" id="nom" name="nom" th:value="${maMatiere.nom}">
+						<small class="form-text text-danger" th:errors="${maMatiere.nom}"></small>
+					</div>
+					<div class="form-group">
+						<label for="duree">Durée:</label> <input type="number"
+							class="form-control" id="duree" name="duree"
+							th:value="${maMatiere.duree}">
+					</div>
+
+				</div>
+				<div class="card-footer text-right">
+					<div class="btn-group ">
+						<button type="submit" class="btn btn-success">
+							<i class="far fa-check-square fa-2x"></i>
+						</button>
+						<a th:href="@{/matiere/cancel}" class="btn btn-warning text-white">
+							<i class="far fa-window-close fa-2x"></i>
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+</body>
+</html>

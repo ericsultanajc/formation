@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout.html">
+<head>
+<meta charset="UTF-8">
+<title>Matière</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="card">
+			<div class="card-header bg-primary text-white">
+				<h2>Liste des matières</h2>
+			</div>
+			<div class="card-body">
+				<table id="matiereTab" class="table table-striped">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Nom</th>
+							<th>Durée</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="mat : ${mesMatieres}">
+							<td th:text="${mat.id}"></td>
+							<td>[[${mat.nom}]]</td>
+							<td>[[${mat.duree}]]</td>
+							<td><div class='btn-group'>
+									<a th:href="@{/matiere/edit(id=${mat.id})}"
+										class='btn btn-primary'> <i class='fas fa-edit'></i>
+									</a> <a th:href="@{/matiere/remove(id=${mat.id})}"
+										class='btn btn-danger'> <i class='far fa-trash-alt'></i>
+									</a>
+								</div></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer">
+				<a th:href="@{/matiere/add}" class="btn btn-primary"> <i
+					class="fas fa-plus-square fa-2x"></i>
+				</a>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
