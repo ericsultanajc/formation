@@ -40,6 +40,12 @@ public class Client {
 		super();
 	}
 
+	public Client(String siret, String raisonSociale) {
+		super();
+		this.siret = siret;
+		this.raisonSociale = raisonSociale;
+	}
+
 	public Client(String siret, String raisonSociale, StatutJuridique statutJuridique) {
 		super();
 		this.siret = siret;
