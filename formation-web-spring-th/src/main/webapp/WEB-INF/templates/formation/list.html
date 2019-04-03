@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout.html">
+<head>
+<meta charset="UTF-8">
+<title>Formation</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="card">
+			<div class="card-header bg-primary text-white">
+				<h2>Liste des formations</h2>
+			</div>
+			<div class="card-body">
+				<table id="formationTab" class="table table-striped">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Dispositif</th>
+							<th>Intitulé</th>
+							<th>Promotion</th>
+							<th>Date de début</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="formation : ${formations}">
+							<td th:text="${formation.id}"></td> 
+							<td>[[${formation.dispositif?.label}]]</td>
+							<td>[[${formation.intitule}]]</td>
+							<td>[[${formation.promotion}]]</td>
+							<td>[[${#dates.format(formation.dtDebut,'dd/MM/yyyy')}]]</td>
+							<td><div class='btn-group'>
+									<a th:href="@{/formation/edit(id=${formation.id})}"
+										class='btn btn-primary'> <i class='fas fa-edit'></i>
+									</a> <a th:href="@{/formation/remove(id=${formation.id})}"
+										class='btn btn-danger'> <i class='far fa-trash-alt'></i>
+									</a>
+								</div></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="card-footer">
+				<a th:href="@{/formation/add}" class="btn btn-primary"> <i
+					class="fas fa-plus-square fa-2x"></i>
+				</a>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

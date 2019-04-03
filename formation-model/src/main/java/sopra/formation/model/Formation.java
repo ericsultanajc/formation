@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -18,6 +20,11 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "training")
@@ -27,20 +34,27 @@ public class Formation {
 	private Long id;
 	@Version
 	private int version;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "plan", length = 5)
+	private Dispositif dispositif;
 	@Column(name = "title", length = 100)
+	@NotEmpty(message = "L'intitule est obligatoire")
+	@Size(min = 3, max=100, message="L'intitule doit comprendre au minimum 3 caractères (100 max)")
 	private String intitule;
 	@Column(name = "promotion", length = 100)
 	private String promotion;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "start_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@PastOrPresent
 	private Date dtDebut;
 	@OneToMany(mappedBy = "formation")
 	private List<Personne> personnes = new ArrayList<Personne>();
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumns({ @JoinColumn(name = "room_name", referencedColumnName = "name"),
 			@JoinColumn(name = "room_place", referencedColumnName = "place") })
 	private Salle salle;
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumns({ @JoinColumn(name = "customer_siret", referencedColumnName = "siret"),
 			@JoinColumn(name = "customer_company_name", referencedColumnName = "company_name") })
 	private Client client;
@@ -78,6 +92,14 @@ public class Formation {
 
 	public void setVersion(int version) {
 		this.version = version;
+	}
+
+	public Dispositif getDispositif() {
+		return dispositif;
+	}
+
+	public void setDispositif(Dispositif dispositif) {
+		this.dispositif = dispositif;
 	}
 
 	public String getIntitule() {

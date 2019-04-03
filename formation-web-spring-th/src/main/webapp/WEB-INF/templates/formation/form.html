@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout.html">
+<head>
+<meta charset="UTF-8">
+<title>Formation</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div id="formationEdit" class="card">
+			<form th:action="@{/formation/save}" method="post">
+				<input type="hidden" name="id" th:value="${formation.id}">
+				<input type="hidden" name="version" th:value="${formation.version}">
+				<div class="card-header">
+					<h5>Edition de la formation</h5>
+				</div>
+				<div class="card-body">
+					<div class="form-group">
+						<label for="dispositif">Dispositif:</label>
+						<select class="form-control" id="dispositif" name="dispositif">
+							<option th:each="dispositif : ${dispositifs}" th:value="${dispositif}" th:selected="${formation.dispositif == dispositif}">[[${dispositif.label}]]</option>
+						</select>
+						<small class="form-text text-danger" th:errors="${formation.dispositif}"></small>
+					</div>
+					<div class="form-group">
+						<label for="intitule">Intitule:</label> <input type="text"
+							class="form-control" id="intitule" name="intitule" th:value="${formation.intitule}">
+							<small class="form-text text-danger" th:errors="${formation.intitule}"></small>
+					</div>
+					<div class="form-group">
+						<label for="promotion">Promotion:</label> <input type="text"
+							class="form-control" id="promotion" name="promotion" th:value="${formation.promotion}">
+							<small class="form-text text-danger" th:errors="${formation.promotion}"></small>
+					</div>
+					<div class="form-group">
+						<label for="dtDebut">Date de début:</label> <input type="date"
+							class="form-control" id="dtDebut" name="dtDebut"
+							th:value="${formation.dtDebut}">
+							<small class="form-text text-danger" th:errors="${formation.dtDebut}"></small>
+					</div>
+
+				</div>
+				<div class="card-footer text-right">
+					<div class="btn-group ">
+						<button type="submit" class="btn btn-success">
+							<i class="far fa-check-square fa-2x"></i>
+						</button>
+						<a th:href="@{/formation/cancel}" class="btn btn-warning text-white">
+							<i class="far fa-window-close fa-2x"></i>
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+</body>
+</html>
