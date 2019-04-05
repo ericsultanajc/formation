@@ -14,12 +14,17 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import sopra.formation.model.Views.ViewCommon;
+
 @Entity
 @Table(name = "student")
 public class Eleve extends Personne {
 	private int age;
 	@Column(name = "birthdate")
 	@Temporal(TemporalType.DATE)
+	@JsonView(ViewCommon.class)
 	private Date dtNaissance;
 	@OneToMany(mappedBy = "eleve")
 	private List<EleveFormateur> formateurs = new ArrayList<EleveFormateur>();

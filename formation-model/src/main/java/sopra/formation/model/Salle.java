@@ -7,15 +7,24 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import sopra.formation.model.Views.ViewCommon;
+import sopra.formation.model.Views.ViewSalleWithFormation;
+
 @Entity
 @Table(name = "room")
 public class Salle {
 	@EmbeddedId
+	@JsonView(ViewCommon.class)
 	private SalleId id;
 	@Version
+	@JsonView(ViewCommon.class)
 	private int version;
+	@JsonView(ViewCommon.class)
 	private int capacite;
-	@OneToOne(mappedBy = "salle", fetch=FetchType.LAZY)
+	@OneToOne(mappedBy = "salle", fetch = FetchType.LAZY)
+	@JsonView(ViewSalleWithFormation.class)
 	private Formation formation;
 
 	public Salle() {

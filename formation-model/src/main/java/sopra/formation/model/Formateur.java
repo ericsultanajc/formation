@@ -11,9 +11,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import sopra.formation.model.Views.ViewCommon;
+
 @Entity
 @Table(name = "teacher")
 public class Formateur extends Personne {
+	@JsonView(ViewCommon.class)
 	private int exp;
 	@OneToMany(mappedBy = "formateur")
 	private List<EleveFormateur> eleves = new ArrayList<EleveFormateur>();

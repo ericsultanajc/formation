@@ -24,6 +24,9 @@ public interface IPersonneRepository extends JpaRepository<Personne, Long> {
 
 	List<Personne> findByFormation(Formation formation);
 
+	@Query("select p from Personne p where p.formation.id = :id")
+	List<Personne> findByFormationId(@Param("id") Long id);
+
 	@Query("select ef.eleve from EleveFormateur ef where ef.formateur.id = :formateurId")
 	List<Eleve> findAllEleveByFormateur(@Param("formateurId") Long formateurId);
 }

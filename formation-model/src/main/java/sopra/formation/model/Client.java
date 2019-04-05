@@ -16,22 +16,28 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "customer")
 @IdClass(ClientId.class)
 public class Client {
 	@Id
+	@JsonView(Views.ViewCommon.class)
 	private String siret;
 	@Id
 	@Column(name = "company_name")
+	@JsonView(Views.ViewCommon.class)
 	private String raisonSociale;
 	@Version
 	private int version;
 	@Column(name = "legal_status", length = 20, nullable = false)
 	@Enumerated(EnumType.STRING)
+	@JsonView(Views.ViewCommon.class)
 	private StatutJuridique statutJuridique;
 	@Column(name = "create_date", updatable = false)
 	@Temporal(TemporalType.TIMESTAMP)
+	@JsonView(Views.ViewCommon.class)
 	private Date dtCreation = new Date();
 	@OneToMany(mappedBy = "client")
 	private List<Formation> formations = new ArrayList<Formation>();

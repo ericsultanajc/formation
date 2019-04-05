@@ -5,12 +5,18 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import sopra.formation.model.Views.ViewCommon;
+
 @Embeddable
 public class SalleId implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Column(name = "name")
+	@JsonView(ViewCommon.class)
 	private String nom;
 	@Column(name = "place")
+	@JsonView(ViewCommon.class)
 	private String lieu;
 
 	public SalleId() {

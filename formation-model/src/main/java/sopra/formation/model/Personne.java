@@ -14,22 +14,32 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import sopra.formation.model.Views.ViewCommon;
+
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Personne {
 	@Id
 	@GeneratedValue
+	@JsonView(ViewCommon.class)
 	private Long id;
 	@Version
+	@JsonView(ViewCommon.class)
 	private int version;
 	@Column(name = "civility", length = 5)
 	@Enumerated(EnumType.STRING)
+	@JsonView(ViewCommon.class)
 	private Civilite civilite;
 	@Column(name = "lastname", length = 100)
+	@JsonView(ViewCommon.class)
 	private String nom;
 	@Column(name = "firstname", length = 100)
+	@JsonView(ViewCommon.class)
 	private String prenom;
 	@Embedded
+	@JsonView(ViewCommon.class)
 	private Adresse adr;
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "training_id")

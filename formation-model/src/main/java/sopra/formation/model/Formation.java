@@ -26,37 +26,51 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import sopra.formation.model.Views.ViewCommon;
+import sopra.formation.model.Views.ViewFormation;
+import sopra.formation.model.Views.ViewFormationWithClient;
+
 @Entity
 @Table(name = "training")
 public class Formation {
 	@Id
 	@GeneratedValue
+	@JsonView(ViewCommon.class)
 	private Long id;
 	@Version
+	@JsonView(ViewCommon.class)
 	private int version;
 	@Enumerated(EnumType.STRING)
 	@Column(name = "plan", length = 5)
+	@JsonView(ViewCommon.class)
 	private Dispositif dispositif;
 	@Column(name = "title", length = 100)
 	@NotEmpty(message = "L'intitule est obligatoire")
 	@Size(min = 3, max=100, message="L'intitule doit comprendre au minimum 3 caractères (100 max)")
+	@JsonView(ViewCommon.class)
 	private String intitule;
 	@Column(name = "promotion", length = 100)
+	@JsonView(ViewCommon.class)
 	private String promotion;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "start_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@PastOrPresent
+	@JsonView(ViewCommon.class)
 	private Date dtDebut;
 	@OneToMany(mappedBy = "formation")
 	private List<Personne> personnes = new ArrayList<Personne>();
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne
 	@JoinColumns({ @JoinColumn(name = "room_name", referencedColumnName = "name"),
 			@JoinColumn(name = "room_place", referencedColumnName = "place") })
+	@JsonView(ViewFormation.class)
 	private Salle salle;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumns({ @JoinColumn(name = "customer_siret", referencedColumnName = "siret"),
 			@JoinColumn(name = "customer_company_name", referencedColumnName = "company_name") })
+	@JsonView(ViewFormationWithClient.class)
 	private Client client;
 
 	public Formation() {
