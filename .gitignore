@@ -50,3 +50,11 @@ formation-web-spring-th/target/
 formation-web-spring-th/\.classpath
 
 formation-web-spring-th/\.project
+
+formation-web-rest/\.settings/
+
+formation-web-rest/target/
+
+formation-web-rest/\.classpath
+
+formation-web-rest/\.project

@@ -62,8 +62,9 @@ public class FormationController {
 	}
 
 	@PostMapping("/save")
-	public String save(@Valid @ModelAttribute("formation") Formation formation, BindingResult result) {
+	public String save(@Valid @ModelAttribute("formation") Formation formation, BindingResult result, Model model) {
 		if(result.hasErrors()) {
+			model.addAttribute("dispositifs", Dispositif.values());
 			return "formation/form";
 		}
 

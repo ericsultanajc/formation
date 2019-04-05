@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "subject")
 @NamedQueries({ @NamedQuery(name = "Matiere.findAllByNom", query = "select m from Matiere m where m.nom = :leNom"),
@@ -30,6 +32,7 @@ public class Matiere {
 	@Column(name = "duration")
 	private int duree;
 	@ManyToMany(mappedBy = "matieres")
+	@JsonIgnore
 	private List<Formateur> formateurs = new ArrayList<Formateur>();
 
 	public Matiere() {
